@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: var(--color-dark-blue);
 }
 .navbar-header__container {
     width: 100%;
@@ -28,4 +27,21 @@
     justify-content: space-around;
     align-items: center;
     padding: var(--padding-medium);
+    background-color: var(--color-dark-blue);
+}
+
+/* ---------- */
+.search-form__container {
+    padding: var(--padding-large);
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+.input-form__input {
+    padding: var(--padding-small);
+    width: 230px;
+    background-color: var(--color-aqua-hover);
+    border: 1px solid var(--color-aqua);
 }
