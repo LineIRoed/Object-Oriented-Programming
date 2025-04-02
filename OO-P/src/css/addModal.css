@@ -1,0 +1,7 @@
+.form-modal {
+    display: none;
+}
+
+.form-modal.form-modal__open {
+    display: block;
+}

@@ -5,3 +5,19 @@
     padding: var(--padding-large);
 
 }
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-large);
+    width: 100%;
+}
+.filter-button__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: var(--padding-large);
+}

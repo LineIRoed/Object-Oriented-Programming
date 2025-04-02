@@ -8,25 +8,67 @@
   <link rel="stylesheet" href="./src/css/navbar.css">
   <link rel="stylesheet" href="./src/css/style.css">
   <link rel="stylesheet" href="./src/css/buttons.css">
+  <link rel="stylesheet" href="./src/css/addModal.css">
   <title>OnlinePharmacy</title>
 </head>
 <body>
   <nav class="navbar">
     <div class="navbar-header__container">
-      <h1 class="navbar-header">The Online Pharmacy</h1>
+      <h1 class="navbar-header">Welcome to The Online Pharmacy</h1>
     </div>
-    <div class="nav-button__container">
-      <button class="nav-button button button-all" data-id="all">All</button>
-      <button class="nav-button button button-prescription" data-id="perscription">Perscription</button>
-      <button class="nav-button button button-overTheCounter" data-id="overTheCounter">Over the Counter</button>
-    </div>
-    <div class="search-form__container">
-      <input type="text" class="input-form__input" name="search-form" id="search-form" placeholder="Search for pharmaceuticals here...">
-      <button class=" button search-button" id="search-form__button" type="submit">Search</button>
-    </div>
+    <div class="navbar-search-add__container">
+      <div class="button-add__container">
+        <button class="button button-add">Add pharmaceutical</button>
+      </div>
+      <div class="search-form__container">
+        <input type="text" class="input-form__input" name="search-form" id="search-form" placeholder="Search for pharmaceuticals here...">
+        <button class=" button search-button" id="search-form__button" type="submit">Search</button>
+      </div>
+    </div>  
   </nav>
   <main>
-    <p class="welcome-message">Welcome to the online Pharmacy. <br> Please find the medication you are looking for through our search form, or our navigation buttons.</p>
+    <div class="filter-button__container">
+      <button class="filter-button button button-all" data-id="all">All</button>
+      <button class="filter-button button button-prescription" data-id="perscription">Perscription</button>
+      <button class="filter-button button button-overTheCounter" data-id="overTheCounter">Over the Counter</button>
+    </div>
+    <p class="welcome-message">Welcome to the online Pharmacy. <br> Please start by adding a pharmaceutical.</p>
   </main>
+
+
+  <!-- form modals -->
+
+  <!-- form modal add pharmaceutical -->
+   <div class="form-modal form-modal__all" data-id="all">
+    <form class="form-modal__form form form-all">
+      <div class="form-modal__close">
+        <img class="form-modal__close-icon" src="./src/assets/icons/close.svg" alt="close">
+      </div>
+      <h3 class="form-modal__heading">Add a new pharmaceutical</h3>
+      <div class="form-element">
+        <input class="form__input form__input--pharmaceutical-name" type="text" id="name" name="name" placeholder="Name">
+      </div>
+      <div class="form-element">
+        <input class="form__input form__input--manufacturer-name" type="text" id="name" placeholder="Manufacturer">
+      </div>
+      <div class="form-element">
+        <input type="date" class="form__input form__input--expiration-date" id="date" placeholder="Expiration date">
+      </div>
+      <div class="form-element">
+        <input type="number" class="form__input form__input--quantity-number" id="number" placeholder="Quantity">
+      </div>
+      <div class="form-element">
+        <p>Is this a perscription drug?</p>
+        <label for="yes">
+          <input type="radio" name="drug" value="yes" required> Yes
+        </label>
+        <label for="no">
+          <input type="radio" name="drug" id="no" value="no" required> No
+        </label>
+      </div>
+      <button class="button form__button">Add pharmaceutical</button>
+    </form>
+   </div>
 </body>
+<script type="module" src="./src/js/app.js"></script>
 </html>
