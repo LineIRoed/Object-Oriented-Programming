@@ -1,7 +1,128 @@
-.form-modal {
-    display: none;
+/* General styles for the modal backdrop (background overlay) */
+.form-modal__all {
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1000;
+    padding-top: 100px;
+    animation: fadeInAnimation ease 0.3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
+/* Keyframes for fade-in animation */
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Show the modal when it's open */
 .form-modal.form-modal__open {
-    display: block;
+    display: flex;
+}
+
+/* Style for the form inside the modal */
+.form {
+    display: flex;
+    position: relative;
+    flex-direction: column; 
+    align-items: center;
+    background-color: var(--color-aqua);
+    border: 1px solid var(--color-purple);
+    padding: var(--padding-large);
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button */
+.form-modal__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2000;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Heading */
+.form-modal__heading {
+    text-align: center;
+    padding-top: 0.8rem;
+    padding-bottom: 0.5rem;
+    font-size: var(--font-size-large);
+}
+
+/* Form input styling */
+.form__input {
+    width: 100%; 
+    max-width: 400px;
+    border: 1px solid var(--color-purple);
+    padding: var(--padding-small);
+    margin: var(--padding-small);
+}
+
+/* Heading for the radio buttons */
+.radio-heading {
+    text-align: center;
+    padding-top: 0.8rem;
+    font-size: var(--font-size-medium);
+    width: 100%; 
+    font-size: var(--font-size-medium);
+}
+
+
+/* Flex container for radio buttons */
+.form-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; 
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+/* Adjust radio button input spacing */
+.form__input--radio {
+    margin: 0 5px;
+}
+
+/* Style for the labels */
+label {
+    display: inline-flex; 
+    align-items: center;
+    font-size: var(--font-size-small);
+    margin: 0;
+    padding: 0;
+}
+
+/* Button styling */
+.form__button {
+    padding: var(--padding-small);
+    font-size: var(--font-size-small);
+    border: none;
+    width: 80%;
+    height: 50px;
+    cursor: pointer;
+    background-color: var(--color-purple);
+    color: var(--color-aqua);
+    margin: var(--padding-large);
+    border-radius: 4px;
+}
+.form__button:hover {
+    background-color: var(--color-purple-hover);
 }
