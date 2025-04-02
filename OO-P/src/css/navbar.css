@@ -1,0 +1,31 @@
+.navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-dark-blue);
+}
+.navbar-header__container {
+    width: 100%;
+    background-color: var(--color-purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-large);
+}
+.navbar-header {
+    font-size: var(--font-size-large);
+    color: var(--color-aqua);
+}
+
+/* ------- */
+.nav-button__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: var(--padding-medium);
+}

@@ -3,12 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/css/reset.css">
+  <link rel="stylesheet" href="./src/css/variables.css">
+  <link rel="stylesheet" href="./src/css/navbar.css">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <link rel="stylesheet" href="./src/css/buttons.css">
   <title>OnlinePharmacy</title>
 </head>
 <body>
   <nav class="navbar">
-    <button class="nav-button button button-prescription" data-id="perscription">Perscription</button>
-    <button class="nav-button button button-overTheCounter" data-id="overTheCounter">Over the Counter</button>
+    <div class="navbar-header__container">
+      <h1 class="navbar-header">The Online Pharmacy</h1>
+    </div>
+    <div class="nav-button__container">
+      <button class="nav-button button button-prescription" data-id="perscription">Perscription</button>
+      <button class="nav-button button button-overTheCounter" data-id="overTheCounter">Over the Counter</button>
+    </div>
   </nav>
 </body>
 </html>

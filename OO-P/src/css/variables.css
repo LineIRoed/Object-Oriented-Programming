@@ -1,0 +1,21 @@
+:root {
+    /* colors */
+    --color-purple: #60303a;
+    --color-aqua: #a2d2c8;
+    --color-dark-blue: #416165;
+    --color-red: #FB3640;
+    --color-gold: #D5B942;
+
+    /* color hover */
+    --color-aqua-hover: #DEEFEC;
+
+    /* padding */
+    --padding-large: 20px;
+    --padding-medium: 10px;
+    --padding-small: 5px;
+
+    /* font size */
+    --font-size-small: 1rem;
+    --font-size-medium: 1.125rem;
+    --font-size-large: 1.563rem;
+}
