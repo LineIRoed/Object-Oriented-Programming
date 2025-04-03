@@ -1,4 +1,15 @@
-import Ui from './Ui.js'; // Import the Ui class
+import Ui from './ui.js';
 
-// Example usage of the class
-Ui.openFormOnClick('.form-modal__all', 'all');  // This assumes you want to open the modal with the id 'all'
+document.addEventListener('DOMContentLoaded', () => {
+    const ui = new Ui();
+
+    // Open and close modal
+    Ui.openFormOnClick();
+
+    // Handle form submission
+    const form = document.querySelector('.form-all');
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        ui.handleFormSubmit(form);
+    });
+});

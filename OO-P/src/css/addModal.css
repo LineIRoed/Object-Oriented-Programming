@@ -71,9 +71,11 @@
 .form__input {
     width: 100%; 
     max-width: 400px;
-    border: 1px solid var(--color-purple);
+    border: 1px solid var(--color-aqua);
     padding: var(--padding-small);
     margin: var(--padding-small);
+    background-color: var(--color-aqua-hover);
+    border: 1px solid var(--color-aqua);
 }
 
 /* Heading for the radio buttons */
@@ -121,7 +123,6 @@ label {
     background-color: var(--color-purple);
     color: var(--color-aqua);
     margin: var(--padding-large);
-    border-radius: 4px;
 }
 .form__button:hover {
     background-color: var(--color-purple-hover);
