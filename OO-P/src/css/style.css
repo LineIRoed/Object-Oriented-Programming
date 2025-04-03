@@ -34,14 +34,25 @@ main {
 }
 .pharmaceutical-item {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     background-color: var(--color-aqua-hover);
     padding: var(--padding-large);
     border: 2px solid var(--color-aqua);
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 h4 {
     font-size: var(--font-size-large);
     padding-bottom: var(--padding-small);
+}
+/* -------- */
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--padding-large);
 }

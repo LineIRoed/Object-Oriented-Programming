@@ -40,3 +40,29 @@
 .filter-button:hover {
     background-color: var(--color-purple-hover);
 }
+
+/* ----------- */
+.delete-btn {
+    padding: var(--padding-small);
+    font-size: var(--font-size-small);
+    border: none;
+    width: 140px;
+    cursor: pointer;
+    background-color: var(--color-red);
+    color: var(--color-aqua-hover);
+}
+.delete-btn:hover {
+    background-color: var(--color-red-hover);
+}
+.edit-btn {
+    padding: var(--padding-small);
+    font-size: var(--font-size-small);
+    border: none;
+    width: 140px;
+    cursor: pointer;
+    background-color: var(--color-yellow);
+    color: var(--color-purple);
+}
+.edit-btn:hover {
+    background-color: var(--color-yellow-hover);
+}

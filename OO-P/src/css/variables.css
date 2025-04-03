@@ -3,12 +3,14 @@
     --color-purple: #60303a;
     --color-aqua: #a2d2c8;
     --color-dark-blue: #416165;
-    --color-red: #FB3640;
-    --color-gold: #D5B942;
+    --color-red: #FF220C;
+    --color-yellow: #F7F052;
 
     /* color hover */
     --color-aqua-hover: #DEEFEC;
     --color-purple-hover: #784F58;
+    --color-red-hover: #FF6455;
+    --color-yellow-hover: #FBF8A9;
 
     /* padding */
     --padding-large: 20px;

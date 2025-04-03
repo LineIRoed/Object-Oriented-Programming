@@ -6,12 +6,14 @@ class Ui {
         this.pharmaceuticalListContainer = document.getElementById('pharmaceutical-list');
         this.welcomeMessage = document.querySelector('.welcome-message');
         this.filterButtons = document.querySelectorAll('.filter-button');
+        this.searchInput = document.getElementById('search-form');
         this.filteredPharmaceuticals = [...this.pharmaceuticalList];
         this.editIndex = -1;
 
-        // Initialize by rendering the page and attaching event listeners
+        // render the page and attach event listeners
         this.renderPage();
         this.attachFilterEventListeners();
+        this.attachSearchEventListener();
     }
 
     // Load pharmaceuticals from localStorage
@@ -47,7 +49,7 @@ class Ui {
     renderPage() {
         this.clearPage();
 
-        // Add pharmaceutical to page
+        // Add pharmaceutical to the page
         this.filteredPharmaceuticals.forEach((pharmaceutical, index) => {
             this.pharmaceuticalListContainer.appendChild(
                 pharmaceutical.render(
@@ -57,7 +59,7 @@ class Ui {
             );
         });
 
-        // Show/hide welcome message
+        // Show/hide welcome message depending on whether pharmaceuticals are present
         if (this.filteredPharmaceuticals.length > 0) {
             this.hideWelcomeMessage();
         } else {
@@ -65,7 +67,7 @@ class Ui {
         }
     }
 
-    // Clear the page of all items
+    // Clear the page of all pharmaceutical items
     clearPage() {
         this.pharmaceuticalListContainer.innerHTML = '';
     }
@@ -80,7 +82,7 @@ class Ui {
         this.welcomeMessage.style.display = 'block';
     }
 
-    // event listeners to filter buttons
+    // Attach event listeners to filter buttons
     attachFilterEventListeners() {
         this.filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -97,7 +99,30 @@ class Ui {
         } else if (type === 'perscription') {
             this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => pharmaceutical.isPrescription);
         } else if (type === 'overTheCounter') {
-            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => !pharmaceutical.isPrescription);
+            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => !pharmaceutical.isPrescription); 
+        }
+
+        this.renderPage();
+    }
+
+    // Attach search event listener to the search input
+    attachSearchEventListener() {
+        this.searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            this.searchPharmaceuticals(query);
+        });
+    }
+
+    // Search for pharmaceutical by name through search input
+    searchPharmaceuticals(query) {
+        if (query.trim() === '') {
+            // If search is empty, show all
+            this.filteredPharmaceuticals = [...this.pharmaceuticalList];
+        } else {
+            // Filter by name
+            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical =>
+                pharmaceutical.name.toLowerCase().includes(query)
+            );
         }
 
         this.renderPage();
@@ -124,7 +149,7 @@ class Ui {
         });
     }
 
-    // add/edit function
+    // Add/edit function
     handleFormSubmit(form) {
         const name = form.querySelector(".form__input--pharmaceutical-name").value;
         const manufacturer = form.querySelector(".form__input--manufacturer-name").value;
@@ -133,7 +158,7 @@ class Ui {
         const isPrescription = form.querySelector("input[name='drug']:checked").value === "yes";
 
         if (this.editIndex !== -1) {
-            // If editing, update the pharmaceutical
+            // If editing, update pharmaceutical
             this.updatePharmaceutical(this.editIndex, name, manufacturer, expirationDate, quantity, isPrescription);
         } else {
             // add a new pharmaceutical
@@ -143,7 +168,7 @@ class Ui {
         this.saveToLocalStorage();
         this.renderPage();
         this.clearForm(form);
-        this.closeModal(); 
+        this.closeModal();
     }
 
     // Add a new pharmaceutical
@@ -156,8 +181,8 @@ class Ui {
     // Update an existing pharmaceutical
     updatePharmaceutical(index, name, manufacturer, expirationDate, quantity, isPrescription) {
         const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription);
-        this.pharmaceuticalList[index] = pharmaceutical;
-        this.filteredPharmaceuticals[index] = pharmaceutical;
+        this.pharmaceuticalList[index] = pharmaceutical; 
+        this.filteredPharmaceuticals[index] = pharmaceutical; 
     }
 
     // Clear the form after submit
@@ -195,8 +220,10 @@ class Ui {
 
         modal.classList.add("form-modal__open");
 
+        
         this.editIndex = index;
     }
 }
 
 export default Ui;
+
