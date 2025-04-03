@@ -223,7 +223,7 @@ class Ui {
         this.deleteModal.style.display = "none";
     }
 
-    // Actually delete the pharmaceutical
+    // delete pharmaceutical
     deletePharmaceutical(index) {
         this.pharmaceuticalList.splice(index, 1);
         this.filteredPharmaceuticals.splice(index, 1);
