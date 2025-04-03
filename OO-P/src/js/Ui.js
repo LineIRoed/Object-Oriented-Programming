@@ -14,6 +14,15 @@ class Ui {
         this.renderPage();
         this.attachFilterEventListeners();
         this.attachSearchEventListener();
+
+        // Initialize delete confirmation modal
+        this.deleteModal = document.querySelector(".delete-modal");
+        this.deleteConfirmBtn = document.querySelector(".delete-confirm-btn");
+        this.deleteCancelBtn = document.querySelector(".delete-cancel-btn");
+
+        // Attach delete confirmation button actions
+        this.deleteConfirmBtn.addEventListener("click", this.confirmDelete.bind(this));
+        this.deleteCancelBtn.addEventListener("click", this.closeDeleteModal.bind(this));
     }
 
     // Load pharmaceuticals from localStorage
@@ -53,7 +62,7 @@ class Ui {
         this.filteredPharmaceuticals.forEach((pharmaceutical, index) => {
             this.pharmaceuticalListContainer.appendChild(
                 pharmaceutical.render(
-                    () => this.deletePharmaceutical(index),
+                    () => this.openDeleteModal(index), // open delete modal
                     () => this.openEditModal(index)
                 )
             );
@@ -198,6 +207,23 @@ class Ui {
     }
 
     // Delete a pharmaceutical
+    openDeleteModal(index) {
+        this.deleteModal.style.display = "flex";
+        this.deleteIndex = index; // Store index for confirmation
+    }
+
+    // Confirm the deletion
+    confirmDelete() {
+        this.deletePharmaceutical(this.deleteIndex);
+        this.closeDeleteModal();
+    }
+
+    // Close the delete modal without deleting
+    closeDeleteModal() {
+        this.deleteModal.style.display = "none";
+    }
+
+    // Actually delete the pharmaceutical
     deletePharmaceutical(index) {
         this.pharmaceuticalList.splice(index, 1);
         this.filteredPharmaceuticals.splice(index, 1);
@@ -226,4 +252,3 @@ class Ui {
 }
 
 export default Ui;
-

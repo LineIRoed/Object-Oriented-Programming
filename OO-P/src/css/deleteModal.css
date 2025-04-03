@@ -1,0 +1,100 @@
+/* General styles for the modal backdrop (background overlay) */
+.delete-modal {
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: 1000;
+    padding-top: 100px;
+    animation: fadeInAnimation ease 0.3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Show the modal when it's open */
+.delete-modal__open {
+    display: flex;
+}
+
+/* Style for the delete confirmation modal */
+.delete-modal-content {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-aqua);
+    border: 1px solid var(--color-purple);
+    padding: var(--padding-large);
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Close button */
+.delete-modal__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2000;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+/* Heading */
+.delete-modal-content p {
+    font-size: var(--font-size-medium);
+    width: 100%;
+    text-align: center;
+    text-wrap: wrap;
+    padding: var(--padding-medium);
+}
+
+/* Button styling for the delete confirmation modal */
+.delete-confirm-btn {
+    padding: var(--padding-small);
+    font-size: var(--font-size-small);
+    border: none;
+    width: 60%;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--color-purple);
+    color: var(--color-aqua);
+    margin: var(--padding-small);
+}
+.delete-confirm-btn:hover {
+    background-color: var(--color-purple-hover);
+}
+
+.delete-cancel-btn {
+    padding: var(--padding-small);
+    font-size: var(--font-size-small);
+    border: none;
+    width: 60%;
+    height: 40px;
+    cursor: pointer;
+    background-color: var(--color-purple);
+    color: var(--color-aqua);
+    margin: var(--padding-small);
+}
+.delete-cancel-btn:hover {
+    background-color: var(--color-purple-hover);
+}
