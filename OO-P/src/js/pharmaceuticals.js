@@ -8,7 +8,7 @@ class Pharmaceutical {
     }
 
     // Render the pharmaceutical item in HTML
-    render() {
+    render(deleteCallback, editCallback) {
         const pharmaceuticalItem = document.createElement("div");
         pharmaceuticalItem.classList.add("pharmaceutical-item");
 
@@ -18,7 +18,12 @@ class Pharmaceutical {
             <p><strong>Expiration Date:</strong> ${this.expirationDate}</p>
             <p><strong>Quantity:</strong> ${this.quantity}</p>
             <p><strong>Prescription Required:</strong> ${this.isPrescription ? 'Yes' : 'No'}</p>
+            <button class="delete-btn">Delete</button>
+            <button class="edit-btn">Edit</button>
         `;
+
+        pharmaceuticalItem.querySelector('.delete-btn').addEventListener('click', deleteCallback);
+        pharmaceuticalItem.querySelector('.edit-btn').addEventListener('click', editCallback);
 
         return pharmaceuticalItem;
     }

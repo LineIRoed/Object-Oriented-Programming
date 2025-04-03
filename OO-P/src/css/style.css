@@ -21,3 +21,27 @@ main {
     width: 100%;
     padding: var(--padding-large);
 }
+
+/* ------------- */
+
+.pharmaceutical-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-large);
+    padding: var(--padding-large);
+    justify-content: left;
+    width: 70%;
+}
+.pharmaceutical-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    background-color: var(--color-aqua-hover);
+    padding: var(--padding-large);
+    border: 2px solid var(--color-aqua);
+}
+h4 {
+    font-size: var(--font-size-large);
+    padding-bottom: var(--padding-small);
+}
