@@ -46,7 +46,7 @@
     padding: var(--padding-small);
     font-size: var(--font-size-small);
     border: none;
-    width: 140px;
+    width: 100%;
     cursor: pointer;
     background-color: var(--color-red);
     color: var(--color-aqua-hover);
@@ -58,7 +58,7 @@
     padding: var(--padding-small);
     font-size: var(--font-size-small);
     border: none;
-    width: 140px;
+    width: 100%;
     cursor: pointer;
     background-color: var(--color-yellow);
     color: var(--color-purple);

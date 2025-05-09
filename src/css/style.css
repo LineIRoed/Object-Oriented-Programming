@@ -1,3 +1,6 @@
+body {
+    min-width: 300px;
+}
 .welcome-message {
     font-size: var(--font-size-medium);
     word-wrap: wrap;
@@ -20,6 +23,8 @@ main {
     justify-content: space-around;
     width: 100%;
     padding: var(--padding-large);
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 /* ------------- */
@@ -55,4 +60,19 @@ h4 {
     justify-content: center;
     align-items: center;
     gap: var(--padding-large);
+    width: 30%;
+}
+
+/* responsive design */
+@media screen and (max-width: 604px ) {
+    .button-container {
+        width: 60%;
+    }
+}
+@media screen and (max-width: 437px ) {
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 }
