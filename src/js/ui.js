@@ -23,6 +23,18 @@ class Ui {
         // Attach delete confirmation button actions
         this.deleteConfirmBtn.addEventListener("click", this.confirmDelete.bind(this));
         this.deleteCancelBtn.addEventListener("click", this.closeDeleteModal.bind(this));
+
+        const addButton = document.querySelector(".button-add");
+        const modal = document.querySelector(".form-modal__all");
+
+        addButton.addEventListener("click", () => {
+            const form = modal.querySelector('form') || modal.querySelector('.form-all');
+                if (form) form.reset();
+
+            this.editIndex = -1;  // Reset edit index since this is 'Add' mode
+            modal.classList.add("form-modal__open");
+        });
+
     }
 
     // Load pharmaceuticals from localStorage
@@ -145,6 +157,9 @@ class Ui {
 
         addButton.addEventListener("click", () => {
             modal.classList.add("form-modal__open");
+            const form = modal.querySelector('form') || modal.querySelector('.form-all');
+                if (form) form.reset();
+            modal.classList.add("form-modal__open");
         });
 
         closeButton.addEventListener("click", () => {
@@ -203,6 +218,11 @@ class Ui {
     // Close the modal
     closeModal() {
         const modal = document.querySelector(".form-modal__all");
+        modal.classList.remove("form-modal__open");
+        if (form) {
+            this.clearForm(form);
+        }
+    
         modal.classList.remove("form-modal__open");
     }
 
