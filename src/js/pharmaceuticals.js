@@ -1,5 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 class Pharmaceutical {
-    constructor(name, manufacturer, expirationDate, quantity, isPrescription) {
+    constructor(name, manufacturer, expirationDate, quantity, isPrescription, id = null) {
+        this.id = id || uuidv4();
         this.name = name;
         this.manufacturer = manufacturer;
         this.expirationDate = expirationDate;
@@ -12,7 +15,6 @@ class Pharmaceutical {
         const pharmaceuticalItem = document.createElement("div");
         pharmaceuticalItem.classList.add("pharmaceutical-item");
 
-        // HTML content with wrapped buttons
         pharmaceuticalItem.innerHTML = `
             <div class="info-container">
                 <h4>${this.name}</h4>
@@ -28,7 +30,6 @@ class Pharmaceutical {
             </div>
         `;
 
-        // Add event listeners to buttons
         pharmaceuticalItem.querySelector('.delete-btn').addEventListener('click', deleteCallback);
         pharmaceuticalItem.querySelector('.edit-btn').addEventListener('click', editCallback);
 

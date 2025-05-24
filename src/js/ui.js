@@ -47,7 +47,8 @@ class Ui {
                     data.manufacturer, 
                     data.expirationDate, 
                     data.quantity, 
-                    data.isPrescription
+                    data.isPrescription,
+                    data.id
                 );
             });
         }
@@ -57,6 +58,7 @@ class Ui {
     // Save pharmaceuticals to localStorage
     saveToLocalStorage() {
         const pharmaceuticalData = this.pharmaceuticalList.map(pharmaceutical => ({
+            id: pharmaceutical.id,
             name: pharmaceutical.name,
             manufacturer: pharmaceutical.manufacturer,
             expirationDate: pharmaceutical.expirationDate,
@@ -200,13 +202,16 @@ class Ui {
         const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription);
         this.pharmaceuticalList.push(pharmaceutical);
         this.filteredPharmaceuticals.push(pharmaceutical);
+        this.saveToLocalStorage();
     }
 
     // Update an existing pharmaceutical
     updatePharmaceutical(index, name, manufacturer, expirationDate, quantity, isPrescription) {
-        const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription);
+        const existingId = this.pharmaceuticalList[index].id;
+        const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription, existingId);
         this.pharmaceuticalList[index] = pharmaceutical; 
-        this.filteredPharmaceuticals[index] = pharmaceutical; 
+        this.filteredPharmaceuticals[index] = pharmaceutical;
+        this.saveToLocalStorage();
     }
 
     // Clear the form after submit
