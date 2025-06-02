@@ -32,7 +32,7 @@ class Ui {
             const form = modal.querySelector('form') || modal.querySelector('.form-all');
                 if (form) form.reset();
 
-            this.editIndex = -1;  // Reset edit index since this is 'Add' mode
+            this.editIndex = -1;
             modal.classList.add("form-modal__open");
 
             this.formButton.textContent = "Add pharmaceutical";
@@ -256,7 +256,7 @@ class Ui {
     // Delete a pharmaceutical
     openDeleteModal(id) {
         this.deleteModal.style.display = "flex";
-        this.deleteId = id; // store the ID instead of index
+        this.deleteId = id;
     }
 
     // Confirm the deletion
@@ -274,7 +274,7 @@ class Ui {
     deletePharmaceutical(id) {
         // Find the index of the pharmaceutical with this id in the original list
         const index = this.pharmaceuticalList.findIndex(pharma => pharma.id === id);
-        if (index === -1) return; // safety check
+        if (index === -1) return;
     
         // Remove from the original pharmaceutical list
         this.pharmaceuticalList.splice(index, 1);
@@ -305,7 +305,7 @@ class Ui {
     
         modal.classList.add("form-modal__open");
     
-        this.editIndex = index; // Store original index for saving later
+        this.editIndex = index;
     }
     
     
