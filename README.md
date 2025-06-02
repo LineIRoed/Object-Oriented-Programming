@@ -1,4 +1,4 @@
-# Object-Oriented-Programming
+# assignment_2
 An Online Pharmacy Inventory Management System
 
 # Table of Contents
