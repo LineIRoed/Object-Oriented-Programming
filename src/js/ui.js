@@ -1,4 +1,4 @@
-import Pharmaceutical from './pharmaceuticals.js';
+import { Pharmaceutical, PrescriptionMedicine, OTCMedicine } from './pharmaceuticals.js';
 
 class Ui {
     constructor() {
@@ -9,6 +9,7 @@ class Ui {
         this.searchInput = document.getElementById('search-form');
         this.filteredPharmaceuticals = [...this.pharmaceuticalList];
         this.editIndex = -1;
+        this.formButton = document.querySelector(".form__button");
 
         // render the page and attach event listeners
         this.renderPage();
@@ -33,6 +34,8 @@ class Ui {
 
             this.editIndex = -1;  // Reset edit index since this is 'Add' mode
             modal.classList.add("form-modal__open");
+
+            this.formButton.textContent = "Add pharmaceutical";
         });
 
     }
@@ -42,18 +45,28 @@ class Ui {
         const pharmaceuticals = localStorage.getItem('pharmaceuticals');
         if (pharmaceuticals) {
             return JSON.parse(pharmaceuticals).map((data) => {
-                return new Pharmaceutical(
-                    data.name, 
-                    data.manufacturer, 
-                    data.expirationDate, 
-                    data.quantity, 
-                    data.isPrescription,
-                    data.id
-                );
+                if (data.isPrescription) {
+                    return new PrescriptionMedicine(
+                        data.name,
+                        data.manufacturer,
+                        data.expirationDate,
+                        data.quantity,
+                        data.id
+                    );
+                } else {
+                    return new OTCMedicine(
+                        data.name,
+                        data.manufacturer,
+                        data.expirationDate,
+                        data.quantity,
+                        data.id
+                    );
+                }
             });
         }
         return [];
-    }
+    }    
+    
 
     // Save pharmaceuticals to localStorage
     saveToLocalStorage() {
@@ -66,18 +79,19 @@ class Ui {
             isPrescription: pharmaceutical.isPrescription
         }));
         localStorage.setItem('pharmaceuticals', JSON.stringify(pharmaceuticalData));
-    }
+    }    
+    
 
     // Render the page with pharmaceuticals
     renderPage() {
         this.clearPage();
 
         // Add pharmaceutical to the page
-        this.filteredPharmaceuticals.forEach((pharmaceutical, index) => {
+        this.filteredPharmaceuticals.forEach((pharmaceutical) => {
             this.pharmaceuticalListContainer.appendChild(
                 pharmaceutical.render(
-                    () => this.openDeleteModal(index), // open delete modal
-                    () => this.openEditModal(index)
+                    () => this.openDeleteModal(pharmaceutical.id), // pass id, not index
+                    () => this.openEditModal(pharmaceutical.id)
                 )
             );
         });
@@ -120,13 +134,14 @@ class Ui {
         if (type === 'all') {
             this.filteredPharmaceuticals = [...this.pharmaceuticalList];
         } else if (type === 'perscription') {
-            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => pharmaceutical.isPrescription);
+            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => pharmaceutical instanceof PrescriptionMedicine);
         } else if (type === 'overTheCounter') {
-            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => !pharmaceutical.isPrescription); 
+            this.filteredPharmaceuticals = this.pharmaceuticalList.filter(pharmaceutical => pharmaceutical instanceof OTCMedicine);
         }
-
+    
         this.renderPage();
-    }
+    }    
+    
 
     // Attach search event listener to the search input
     attachSearchEventListener() {
@@ -199,20 +214,28 @@ class Ui {
 
     // Add a new pharmaceutical
     addPharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription) {
-        const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription);
+        const pharmaceutical = isPrescription
+            ? new PrescriptionMedicine(name, manufacturer, expirationDate, quantity)
+            : new OTCMedicine(name, manufacturer, expirationDate, quantity);
+    
         this.pharmaceuticalList.push(pharmaceutical);
         this.filteredPharmaceuticals.push(pharmaceutical);
         this.saveToLocalStorage();
     }
+    
 
     // Update an existing pharmaceutical
     updatePharmaceutical(index, name, manufacturer, expirationDate, quantity, isPrescription) {
         const existingId = this.pharmaceuticalList[index].id;
-        const pharmaceutical = new Pharmaceutical(name, manufacturer, expirationDate, quantity, isPrescription, existingId);
-        this.pharmaceuticalList[index] = pharmaceutical; 
+        const pharmaceutical = isPrescription
+            ? new PrescriptionMedicine(name, manufacturer, expirationDate, quantity, existingId)
+            : new OTCMedicine(name, manufacturer, expirationDate, quantity, existingId);
+    
+        this.pharmaceuticalList[index] = pharmaceutical;
         this.filteredPharmaceuticals[index] = pharmaceutical;
         this.saveToLocalStorage();
     }
+    
 
     // Clear the form after submit
     clearForm(form) {
@@ -223,23 +246,22 @@ class Ui {
     // Close the modal
     closeModal() {
         const modal = document.querySelector(".form-modal__all");
+        const form = modal.querySelector('form') || modal.querySelector('.form-all');
         modal.classList.remove("form-modal__open");
         if (form) {
             this.clearForm(form);
         }
-    
-        modal.classList.remove("form-modal__open");
     }
 
     // Delete a pharmaceutical
-    openDeleteModal(index) {
+    openDeleteModal(id) {
         this.deleteModal.style.display = "flex";
-        this.deleteIndex = index; // Store index for confirmation
+        this.deleteId = id; // store the ID instead of index
     }
 
     // Confirm the deletion
     confirmDelete() {
-        this.deletePharmaceutical(this.deleteIndex);
+        this.deletePharmaceutical(this.deleteId);
         this.closeDeleteModal();
     }
 
@@ -249,31 +271,44 @@ class Ui {
     }
 
     // delete pharmaceutical
-    deletePharmaceutical(index) {
+    deletePharmaceutical(id) {
+        // Find the index of the pharmaceutical with this id in the original list
+        const index = this.pharmaceuticalList.findIndex(pharma => pharma.id === id);
+        if (index === -1) return; // safety check
+    
+        // Remove from the original pharmaceutical list
         this.pharmaceuticalList.splice(index, 1);
-        this.filteredPharmaceuticals.splice(index, 1);
+    
+        // Remove from the filtered list by filtering out the item with this id
+        this.filteredPharmaceuticals = this.filteredPharmaceuticals.filter(pharma => pharma.id !== id);
+    
         this.saveToLocalStorage();
         this.renderPage();
     }
 
     // Open the edit modal
-    openEditModal(index) {
+    openEditModal(id) {
+        // Find the index in the original pharmaceuticalList by id
+        const index = this.pharmaceuticalList.findIndex(pharma => pharma.id === id);
+        if (index === -1) return;
+    
         const pharmaceutical = this.pharmaceuticalList[index];
-
+    
         const modal = document.querySelector(".form-modal__all");
         const form = modal.querySelector('.form-all');
-
+    
         form.querySelector(".form__input--pharmaceutical-name").value = pharmaceutical.name;
         form.querySelector(".form__input--manufacturer-name").value = pharmaceutical.manufacturer;
         form.querySelector(".form__input--expiration-date").value = pharmaceutical.expirationDate;
         form.querySelector(".form__input--quantity-number").value = pharmaceutical.quantity;
         form.querySelector(`input[name="drug"][value="${pharmaceutical.isPrescription ? 'yes' : 'no'}"]`).checked = true;
-
+    
         modal.classList.add("form-modal__open");
-
-        
-        this.editIndex = index;
+    
+        this.editIndex = index; // Store original index for saving later
     }
+    
+    
 }
 
 export default Ui;

@@ -10,7 +10,6 @@ class Pharmaceutical {
         this.isPrescription = isPrescription;
     }
 
-    // Render the pharmaceutical item in HTML
     render(deleteCallback, editCallback) {
         const pharmaceuticalItem = document.createElement("div");
         pharmaceuticalItem.classList.add("pharmaceutical-item");
@@ -37,4 +36,18 @@ class Pharmaceutical {
     }
 }
 
-export default Pharmaceutical;
+// Prescription subclass
+class PrescriptionMedicine extends Pharmaceutical {
+    constructor(name, manufacturer, expirationDate, quantity, id = null) {
+        super(name, manufacturer, expirationDate, quantity, true, id);
+    }
+}
+
+// Over-the-counter subclass
+class OTCMedicine extends Pharmaceutical {
+    constructor(name, manufacturer, expirationDate, quantity, id = null) {
+        super(name, manufacturer, expirationDate, quantity, false, id);
+    }
+}
+
+export { Pharmaceutical, PrescriptionMedicine, OTCMedicine };
