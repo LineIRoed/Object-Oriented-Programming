@@ -98,11 +98,6 @@
     width: 70%;
 }
 
-/* Adjust radio button input spacing */
-.form__input--radio {
-    margin: 0 5px;
-}
-
 /* Style for the labels */
 label {
     display: inline-flex; 
