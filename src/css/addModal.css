@@ -106,7 +106,9 @@ label {
     margin: 0;
     padding: 0;
 }
-
+.radio-container {
+    width: 100%;
+}
 /* Button styling */
 .form__button {
     padding: var(--padding-small);

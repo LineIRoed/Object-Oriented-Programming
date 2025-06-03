@@ -61,12 +61,14 @@
       </div>
       <div class="form-element">
         <p class="radio-heading">Is this a perscription drug?</p>
-        <label for="yes">
-          <input type="radio" name="drug" value="yes" required class="form__input form__input--radio"> Yes
-        </label>
-        <label for="no">
-          <input type="radio" name="drug" id="no" value="no" required class="form__input form__input--radio"> No
-        </label>
+        <div class="radio-container">
+          <label for="yes">
+            <input type="radio" name="drug" value="yes" required class="form__input form__input--radio"> Yes
+          </label>
+          <label for="no">
+            <input type="radio" name="drug" id="no" value="no" required class="form__input form__input--radio"> No
+          </label>
+        </div> 
       </div>
       <button class="button form__button form-save-btn">Add pharmaceutical</button>
     </form>
