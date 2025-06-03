@@ -96,6 +96,8 @@
     gap: 1rem; 
     flex-wrap: wrap;
     width: 70%;
+    flex-direction: column;
+    text-align: center;
 }
 
 /* Style for the labels */
@@ -108,6 +110,11 @@ label {
 }
 .radio-container {
     width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 /* Button styling */
 .form__button {
